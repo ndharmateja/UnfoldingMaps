@@ -1,0 +1,25 @@
+Title:
+Depth and Magnitude filters to show only the specific Earthquakes!
+
+Description:
+The extension I have written is to add the filter functionality (like in e-commerce websites) and display the earthquakes based on depth and magnitude.
+Each parameter (depth or magnitude) has three different categories to display the earthquakes.
+It also has a "Reset Filters" button to reset all the applied filters.
+It also has a toggle button to show or hide the cities on the map.
+This filtering and displaying the earthquakes doesn't affect the previous created functionality of event driven programming (clicking and hovering on cities or quakes)
+All the EQ data shown in the screenshot is from the URL provided in the EarthquakeCityMap class : "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.atom".
+The screenshot different cases of filters being applied. To indicate that the functionality was not lost (hovering and clicking) the cursor was placed on either the city/ quake while taking the screenshots.
+
+Technical Description:
+I have created an additional Button class, that has the following:
+It has a constructor based on the x and y coordinates of the top left vertex of the button and the width and height of the button [ public Button(float x1, float y1, float width, float height) ]
+It has a boolean pressed variable indicating whether or not it is pressed.
+It has all the required getters and setters accordingly.
+It also has the functionality to draw the button [ public void drawButton(PApplet applet, int color) ].
+Now I have added code to the public void mouseClicked() method, to toggle the Button's pressed variable we press inside the button.
+
+I have added two new variables protected boolean depthHidden and protected boolean magnitudeHidden along with the already present protected boolean hidden in the CommonMarker class to show/hide markers based on the filters applied. The marker will be drawn only if all the three variables hidden, depthHidden, magnitudeHidden are all set to false. Therefore, this extension doesn't affect the original functionality.
+
+I have added helper method private void checkCriteriaAndUpdate() in the public void draw() method that loops through the ArrayList<Marker> quakeMarkers and through all the Buttons for each marker and sets the variables depthHidden and magnitudeHidden ﻿to either ﻿true ﻿or ﻿false depending on the Buttons pressed. 
+
+I also have written loads of other helper private methods to draw buttons, add text, check the criteria (of depth and magnitude with respect to the Buttons pressed), to show/ hide cities (based on whether or not the toggle city Button is pressed or not) etc.
